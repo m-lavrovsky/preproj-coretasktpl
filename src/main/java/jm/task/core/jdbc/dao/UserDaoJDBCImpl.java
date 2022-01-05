@@ -8,14 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
-    private Util dbParams;
+    private Util dbParams = new Util("jdbc:mysql://localhost:3306/task-113?useSSL=false&serverTimezone=UTC",
+            "root","Xde%vB47&pXf");;
 
     public UserDaoJDBCImpl() {
     }
 
     public void createUsersTable() {
-        dbParams = new Util("jdbc:mysql://localhost:3306/task-113?useSSL=false&serverTimezone=UTC",
-                "root","Xde%vB47&pXf");
         try (Connection conn = DriverManager.getConnection(dbParams.getUrl(), dbParams.getUser(), dbParams.getPassword())) {
             Statement sqlCommand = conn.createStatement();
             String sqlCmd="CREATE TABLE IF NOT EXISTS users (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(40) NOT NULL"+
@@ -29,8 +28,6 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void dropUsersTable() {
-        dbParams = new Util("jdbc:mysql://localhost:3306/task-113?useSSL=false&serverTimezone=UTC",
-                "root","Xde%vB47&pXf");
         try (Connection conn = DriverManager.getConnection(dbParams.getUrl(), dbParams.getUser(), dbParams.getPassword())) {
             Statement sqlCommand = conn.createStatement();
             String sqlCmd="DROP TABLE IF EXISTS `users`";
@@ -43,8 +40,6 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void saveUser(String name, String lastName, byte age) {
-        dbParams = new Util("jdbc:mysql://localhost:3306/task-113?useSSL=false&serverTimezone=UTC",
-                "root","Xde%vB47&pXf");
         try (Connection conn = DriverManager.getConnection(dbParams.getUrl(), dbParams.getUser(), dbParams.getPassword())) {
             Statement sqlCommand = conn.createStatement();
             String sqlCmd="Insert into users (name, lastname, age) values ('"+name+"', '"+lastName+"', "+age+")";
@@ -58,8 +53,6 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void removeUserById(long id) {
-        dbParams = new Util("jdbc:mysql://localhost:3306/task-113?useSSL=false&serverTimezone=UTC",
-                "root","Xde%vB47&pXf");
         try (Connection conn = DriverManager.getConnection(dbParams.getUrl(), dbParams.getUser(), dbParams.getPassword())) {
             Statement sqlCommand = conn.createStatement();
             String sqlCmd="DELETE from `users` where id='"+id+"'";
@@ -73,8 +66,6 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public List<User> getAllUsers() {
         List<User> result = new ArrayList<>();
-        dbParams = new Util("jdbc:mysql://localhost:3306/task-113?useSSL=false&serverTimezone=UTC",
-                "root","Xde%vB47&pXf");
         try (Connection conn = DriverManager.getConnection(dbParams.getUrl(), dbParams.getUser(), dbParams.getPassword())) {
             Statement sqlCommand = conn.createStatement();
             String sqlCmd="SELECT * FROM `users`";
@@ -91,8 +82,6 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void cleanUsersTable() {
-        dbParams = new Util("jdbc:mysql://localhost:3306/task-113?useSSL=false&serverTimezone=UTC",
-                "root","Xde%vB47&pXf");
         try (Connection conn = DriverManager.getConnection(dbParams.getUrl(), dbParams.getUser(), dbParams.getPassword())) {
             Statement sqlCommand = conn.createStatement();
             String sqlCmd="TRUNCATE `users`";
