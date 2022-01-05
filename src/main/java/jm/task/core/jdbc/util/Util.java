@@ -25,9 +25,7 @@ public class  Util {
         return user;
     }
 
-    public String getPassword() {
-        return password;
-    }
+    public String getPassword() { return password; }
 
     /*public void connect() throws SQLException {
         try {
